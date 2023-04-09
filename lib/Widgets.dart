@@ -1,6 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:paypersa/data.dart';
 
+class customCartContainer extends StatelessWidget {
+  final String title,subTitle;
+  bool isTap=false;
+
+  customCartContainer({super.key, required this.title, required this.subTitle,required this.isTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: Container(
+          width: 140,
+          height: 55,
+          decoration: BoxDecoration(
+              color: ConstColors.cardColor,
+              borderRadius: BorderRadius.circular(14),
+              border: isTap
+                  ? Border.all(width: 2, color: ConstColors.radioButtonColor!)
+                  : const Border()),
+          child: Padding(
+            padding:
+            EdgeInsets.only(left: 12, top: isTap ? size.height * 0.007 : 7, right: 5, bottom: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                Spacer(),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Text(
+                    '\$ $subTitle',
+                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
+                  ),
+                  isTap
+                      ? Icon(Icons.radio_button_checked_rounded,
+                      size: 18, color: ConstColors.radioButtonColor)
+                      : Container()
+                ])
+              ],
+            ),
+          ),
+        ),
+      );
+  }
+}
+
+
+
+
+
 Widget customContainer(
     {required String text,
       required Function onTap,
@@ -31,8 +84,8 @@ Widget customCard(
       margin: EdgeInsets.symmetric(horizontal: 2),
       decoration:
       BoxDecoration(borderRadius: BorderRadius.circular(20), color: color),
-      height: 80,
-      width: 85,
+      height: 85,
+      width: 90,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -174,9 +227,10 @@ Widget singleCartBottomSheet(BuildContext context,{required Function onTap}) {
 }
 
 Widget multiCartBottomSheet(BuildContext context, {required Function onTap}) {
+  final size = MediaQuery.of(context).size;
   return SingleChildScrollView(
     child: SizedBox(
-      height: 580,
+      height: size.height * 0.82,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -206,7 +260,7 @@ Widget multiCartBottomSheet(BuildContext context, {required Function onTap}) {
               ],
             ),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -380,46 +434,6 @@ Widget multiCartBottomSheet(BuildContext context, {required Function onTap}) {
   );
 }
 
-Widget customCartContainer(
-    {required String title, required String subTitle, bool isTap = false}) {
-  return Padding(
-    padding: const EdgeInsets.only(left: 8.0),
-    child: Container(
-      width: 140,
-      height: 50,
-      decoration: BoxDecoration(
-          color: ConstColors.cardColor,
-          borderRadius: BorderRadius.circular(14),
-          border: isTap
-              ? Border.all(width: 2, color: ConstColors.radioButtonColor!)
-              : const Border()),
-      child: Padding(
-        padding:
-        EdgeInsets.only(left: 12, top: isTap ? 4 : 8, right: 5, bottom: 5),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-            Spacer(),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text(
-                '\$ $subTitle',
-                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
-              ),
-              isTap
-                  ? Icon(Icons.radio_button_checked_rounded,
-                  size: 18, color: ConstColors.radioButtonColor)
-                  : Container()
-            ])
-          ],
-        ),
-      ),
-    ),
-  );
-}
 
 Widget customCartContainer2({required String title, bool isTap = false}) {
   return Padding(

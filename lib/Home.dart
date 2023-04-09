@@ -35,6 +35,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    print(size.width);
     return Scaffold(
       appBar: AppBar(
         title: Text('Menu'),
@@ -72,7 +74,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding: EdgeInsets.symmetric(vertical: size.height * 0.05),
               child: Column(
                 children: [
                   Row(
@@ -113,16 +115,14 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 36,
-            ),
+            SizedBox(height: size.height * 0.030),
             Container(
-              height: 230,
+              height: size.height * 0.27,
               child: GridView.builder(
                   itemCount: title.length,
                   shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 180,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
                       childAspectRatio: 2.7,
                       mainAxisSpacing: 5,
                       crossAxisSpacing: 5),
@@ -140,11 +140,9 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(title[i],
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 16)),
-                            SizedBox(
-                              height: 6,
-                            ),
+                            const SizedBox(height: 6),
                             Text(
                               subTitle[i],
                               style: TextStyle(fontWeight: FontWeight.w500),
